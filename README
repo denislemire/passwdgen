@@ -1,0 +1,25 @@
+passwdGen 2.2 README
+====================
+
+passwdGen is a utility for generating random passwords. The software is coded
+entirely in C++ and has a rich set of features. It should prove useful for
+system administrators or people who just like using cryptic passwords.
+
+In systems where security is a concern, good secure passwords are often
+necessary. In environments where password aging schemes are put in place it is
+useful to have a quick way to come up with new unique passwords.
+
+Amongst passwdGen's features is the ability to generate pronounceable passwords
+(pronounceable passwords are easier to remember, yet still secure), and generate
+passwords of entirely left, right, or alternating keys (useless).
+
+passwdGen is also designed to be modular. The main codebase of passwdGen is a
+C++ class library. As such it is trivial to write new front-ends for passwdGen
+such as GUI interfaces for various desktop environments.
+
+It is hoped that passwdGen is fairly portable across many Unix variants, I
+believe it to be compatible with any Unix with /dev/random and GNU development
+tools. Compatibility reports are greatly appreciated.
+
+Unix's without /dev/random will be supported when an adequate way to gather
+entropy is found on these systems.

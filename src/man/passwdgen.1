@@ -1,0 +1,68 @@
+.\" @(#)passwdGen.1 1.11.1 93/19/22 PJV;
+.TH PASSWDGEN 1 "Version 2.2" "Denis Lemire"
+.SH NAME
+passwdGen \- A flexible random password generator
+.SH DESCRIPTION
+.LP
+passwdGen is a utility useful to system administrators and end-users who, for security reasons,
+wish to generate random passwords based on their criteria
+.SH "REQUIRED OPTIONS"
+.TP
+.B At least one of the following options must be used:
+.TP
+.B -a, --lowercase
+include lowercase alphabetical characters in the generated password.
+.TP
+.B -A, --uppercase	
+include uppercase alphabetical characters in the generated password.
+.TP
+.B -1, --numeric
+include numeric characters in the generated password.
+.TP
+.B -@, --misc
+include misc ASCII characters.
+.SH OTHER OPTIONS
+.TP
+.B     --min=number
+Specify the minimum length of the generated password. Defaults to 6.
+.TP
+.B     --max=number
+Specify the maximum length of the generated password. Defaults to 8.
+.TP
+.B     --length=number
+Specify a fixed length for the generated password.
+.TP
+.B -p, --pronounceable
+Generate pronounceable passwords.
+.TP
+.B -l, --lefthand
+Generate a password that can be typed entirely with your left hand.
+.TP
+.B -r, --righthand
+Generate a password that can be typed entirely with your right hand.
+.TP
+.B --alternate
+Generate a password that alternates between left-hand characters and right-hand
+characters.
+.TP
+.B -q, --quiet
+Output only the password, this is useful for frontends or scripts to use.
+.TP
+.B --version
+Display version information and exit.
+.TP
+.B --help	
+Display command-line summary and exit.
+.SH AUTHOR
+.nf
+Denis Lemire
+5013 48 Street
+Beaumont, AB T4X 1H7
+Canada
+.fi
+.PP
+Additional information can be found at:
+.br
+http://members.home.com/denisl/passwdgen
+.PP
+Mail bugs and suggestions to: denis@lemire.com

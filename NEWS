@@ -1,0 +1,199 @@
+passwdGen NEWS
+==============
+
+----------------------------------------------------------------------
+ 2.2 -> 2.3
+----------------------------------------------------------------------
+
+  - Improved design of passwdGen classes.
+
+
+----------------------------------------------------------------------
+ 2.1 -> 2.2
+----------------------------------------------------------------------
+
+  - Intense overhaul of passwdGen. passwdGen's back-end is now a C++
+    class which is installed as a shared library. The various
+    interfaces (now distributed separately) use this class library to
+    function.
+
+  - The KDE and GNOME front-ends will now be included separately
+    from passwdGen and also have independent version numbers. This is
+    much easier to maintain and also allows passwdGen users to write
+    their own front-ends should they find themselves with too much
+    free time. This as I see it, is the best way to remain neutral in
+    my choice of GUI toolkits and allows others freedom from my views
+    as to development choices in passwdGen.
+
+  - I stripped a lot of information from the AUTHORS file in the
+    source distribution of passwdGen. While I greatly appreciate all
+    the contributions that have been made, many of them are no longer
+    relevant to the current code base. I didn't want to remove all
+    mention to contributions so I left the names intact, just removed
+    exactly what was contributed by each individual. If anyone who
+    contributed to passwdGen has a problem with this, contact me.
+
+  - Fixed a bug where if the user did -min=x or -max=x instead of the
+    proper --min=x or --max=x passwdgen would segfault.
+
+
+----------------------------------------------------------------------
+ 2.02 -> 2.1
+----------------------------------------------------------------------
+
+  - restructured passwdGen source tree, allowing complete isolation of
+    passwdGen's engine and the various front-ends. This will allow any
+    additional front-ends to be easily added in the future
+
+  - passwdGen now uses minimum and maximum length instead of a fixed
+    password length
+
+  - very simple pronounceable password algorithm added
+
+  - new KDE 2 front-end
+
+  - Unfortunately, for security reasons passwdGen no longer supports
+    system without /dev/urandom. Support for such systems is planned.
+    Things would go a lot faster if somebody could contribute routines
+    for a secure random number generator to passwdGen
+
+
+----------------------------------------------------------------------
+ 2.01 -> 2.02
+----------------------------------------------------------------------
+
+  - passwdGen should now build on FreeBSD and possibly many other
+    non-Linux Unix systems. (compatibility reports appreciated)
+
+  - Added feature to alternate characters to left and right keys
+
+  - Fixed a bug where gpasswdgen would freeze if you tried to
+    generate a password with no characters with left or right hand
+    characters only. (shame on you if you tried to do this anyway)
+
+  - It was suggested that I seed random from more then just one
+    character for security reasons (improved randomness). This is now
+    implemented as such.
+
+
+----------------------------------------------------------------------
+ 2.0 -> 2.01
+----------------------------------------------------------------------
+
+  - Slight improvements to GTK+ GUI (pixmaps on buttons, misc tweaks).
+
+  - Slight code improvements to improve code modularity.
+
+  - Package now uses GNU autoconf/automake for easier building and
+    package maintainence.
+
+
+----------------------------------------------------------------------
+ 1.1 -> 2.0
+----------------------------------------------------------------------
+
+  - Wrote first GTK+ version of passwdGen
+
+
+----------------------------------------------------------------------
+ 1.02 -> 1.1
+----------------------------------------------------------------------
+
+  - Rewrote getASCII() function, now much more efficient.
+
+  - Wrote man page for passwdGen.
+
+  - This version was never released publicly.
+
+
+----------------------------------------------------------------------
+ 1.01 -> 1.02
+----------------------------------------------------------------------
+
+  - Makefile compatibility improvements
+
+  - passwdGen now prints warning to stderr if /dev/random can't be
+    used.
+
+
+----------------------------------------------------------------------
+ 1.0 -> 1.01
+----------------------------------------------------------------------
+
+  - Fixed a minor bug, rewrote random seeding code.
+
+  - First version publicly released.
+
+
+----------------------------------------------------------------------
+ 0.9 -> 1.0
+----------------------------------------------------------------------
+
+  - Added option for left or right hand only passwords.
+
+
+----------------------------------------------------------------------
+ 0.8 -> 0.9
+----------------------------------------------------------------------
+
+  - Rewrote command line parsing code.
+
+
+----------------------------------------------------------------------
+ 0.7 -> 0.8
+----------------------------------------------------------------------
+
+  - Slight code clean-up, more efficient.
+
+  - Increased max password length to 50 characters (was 25).
+
+  - Improved command line syntax a little.
+
+
+----------------------------------------------------------------------
+ 0.6 -> 0.7
+----------------------------------------------------------------------
+
+  - Command line options fully implemented.
+
+
+----------------------------------------------------------------------
+ 0.5 -> 0.6
+----------------------------------------------------------------------
+
+  - Laid out foundation for command line handling
+
+
+----------------------------------------------------------------------
+ 0.4 -> 0.5
+----------------------------------------------------------------------
+
+  - /dev/random is now used on supported systems.
+
+
+----------------------------------------------------------------------
+ 0.3 -> 0.4
+----------------------------------------------------------------------
+
+  - Modularized the code and created Makefile
+
+
+----------------------------------------------------------------------
+ 0.2 -> 0.3
+----------------------------------------------------------------------
+
+  - Another code clean-up (thanks Krypt) 
+
+
+----------------------------------------------------------------------
+ 0.1 -> 0.2
+----------------------------------------------------------------------
+
+  - Code cleanup, more efficient
+
+
+----------------------------------------------------------------------
+ 0.1
+----------------------------------------------------------------------
+
+  - First working version.
