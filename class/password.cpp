@@ -32,13 +32,6 @@ password::password ()
 
 password::password (int a, int b)
 {
-  if (b >= 4 && b <= 20) {
-    minLength = b;
-    maxLength = b;
-  } else {
-    lengthErr ();
-  }
-
   pwdType = a;
   whichHand = 0;
   isPronounceable = false;
@@ -46,12 +39,8 @@ password::password (int a, int b)
 
 password::password (int a, int b, int c)
 {
-  if (b >= 4 && c <= 20) {
-    minLength = b;
-    maxLength = c;
-  } else {
-    lengthErr ();
-  }
+  minLength = b;
+  maxLength = c;
 
   pwdType = a;
   whichHand = 0;
@@ -65,22 +54,14 @@ void password::type (int a)
 
 void password::length (int a)
 {
-  if (a >= 4 && a <= 20) {
-    minLength = a;
-    maxLength = a;
-  } else {
-    lengthErr ();
-  }
+  minLength = a;
+  maxLength = a;
 }
 
 void password::length (int a, int b)
 {
-  if (a >= 4 && b <= 20) {
-    minLength = a;
-    maxLength = b;
-  } else {
-    lengthErr ();
-  }
+  minLength = a;
+  maxLength = b;
 }
 
 void password::hand (int a)
@@ -98,6 +79,12 @@ char *password::generate ()
   char randChar;
   short passwdLength;
   short counter[2];
+
+  if (passwdLength < 1) {
+    lengthErr ();
+  }
+
+  passwd = new char[passwdLength + 1];
 
   seedRandom ();
 
@@ -128,7 +115,7 @@ ostream &operator << (ostream &os, password &a)
 
 void password::lengthErr () noexcept(false)
 {
-  pwdgenerr z ("password length must be a minimum of 4 and a maximum of 20.", 1);
+  pwdgenerr z ("password length must be a minimum of 1.", 1);
   throw z;
 }
 
@@ -363,4 +350,11 @@ int password::checkPronounce (char randChar, short *counter)
   }
 
   return (0);
+
+}
+
+password::~password ()
+{
+  delete[] passwd;
+  passwd = nullptr;
 }

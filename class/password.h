@@ -38,6 +38,7 @@ class password
     password ();
     password (int type, int length);
     password (int type, int min, int max);
+    ~password ();
     void type (int type);
     void length (int length);
     void length (int min, int max);
@@ -54,5 +55,5 @@ class password
     int checkPronounce (char randChar, short *counter);
     int minLength, maxLength, pwdType, whichHand;
     bool isPronounceable;
-    char passwd[21];
+    char *passwd = nullptr;
 };
