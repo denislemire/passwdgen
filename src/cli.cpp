@@ -31,7 +31,7 @@ int parseCmdLine (int argc, char **argv, password *a, int *quietOput);
 
 void instructUser ()
 {
-  cout << "passwdgen: You must specificy one or more of the `-Aa1@\' options\n"
+  cout << "passwdgen: You must specify one or more of the `-Aa1@\' options\n"
        << "Try `passwdgen --help\' for more information.\n";
 }
 
