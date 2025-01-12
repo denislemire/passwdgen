@@ -83,6 +83,10 @@ char *password::generate ()
 
   seedRandom ();
 
+  if (minLength > maxLength) {
+    lengthErr ("minimum length must not exceed maximum length.");
+  }
+
   if (minLength == maxLength) {
     passwdLength = maxLength;
   } else {
@@ -90,7 +94,7 @@ char *password::generate ()
   }
 
   if (passwdLength < 1) {
-    lengthErr ();
+    lengthErr ("password length must be a minimum of 1.");
   }
 
   for (counter[0]=0; counter[0]<=passwdLength; counter[0]++) {
@@ -112,9 +116,9 @@ ostream &operator << (ostream &os, password &a)
   return os;
 }
 
-void password::lengthErr () noexcept(false)
+void password::lengthErr (const char *str) noexcept(false)
 {
-  pwdgenerr z ("password length must be a minimum of 1.", 1);
+  pwdgenerr z (str, 1);
   throw z;
 }
 
