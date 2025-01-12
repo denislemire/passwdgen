@@ -1,0 +1,17 @@
+version: 2.1
+
+jobs:
+  build:
+    macos:
+      xcode: "16.2.0"
+    steps:
+      - checkout
+      - run:
+          name: Brew install bsdmake
+          command: brew install bsdmake
+      - run:
+          name: Brew install bsdmake
+          command: brew install bsdmake
+      - run:
+          name: Compile
+          command: bsdmake
