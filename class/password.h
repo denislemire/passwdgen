@@ -18,6 +18,8 @@
 
 
 #include <iostream>
+using namespace std;
+
 #include "pwdgenerr.h"
 
 #define LOWERCASE_ALPHA 1
