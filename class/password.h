@@ -47,8 +47,8 @@ class password
     friend ostream &operator << (ostream &os, password &a);
 
   protected:
-    void lengthErr () throw (pwdgenerr);
-    void seedRandom () throw (pwdgenerr); 
+    void lengthErr () noexcept(false);
+    void seedRandom () noexcept(false); 
     char getASCII ();
     int checkHand (char randChar, short *counter);
     int checkPronounce (char randChar, short *counter);
