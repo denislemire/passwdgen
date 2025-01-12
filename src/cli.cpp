@@ -67,7 +67,6 @@ int parseCmdLine (int argc, char **argv, password *a, int *quietOutput)
 {
   int option, option_index;
   int passwdType = 0, minLength = 6, maxLength = 8;
-  std::stringstream s;
 
   static struct option const long_options[] = {
     {"lowercase", no_argument, 0, 'a'},
@@ -95,6 +94,7 @@ int parseCmdLine (int argc, char **argv, password *a, int *quietOutput)
   do {
     option_index = 0;
     option = getopt_long (argc, argv, "aA1@frbpq", long_options, &option_index);
+    std::stringstream s;
 
     switch (option) {
       case 'a': passwdType = passwdType + 1; break;
