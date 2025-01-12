@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2000 Denis Lemire <denis@lemire.com>
+//  Copyright (C) 2025 Denis Lemire <denis@lemire.name>
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,6 +18,8 @@
 
 
 #include <iostream>
+using namespace std;
+
 #include "pwdgenerr.h"
 
 #define LOWERCASE_ALPHA 1
@@ -45,8 +47,8 @@ class password
     friend ostream &operator << (ostream &os, password &a);
 
   protected:
-    void lengthErr () throw (pwdgenerr);
-    void seedRandom () throw (pwdgenerr); 
+    void lengthErr () noexcept(false);
+    void seedRandom () noexcept(false); 
     char getASCII ();
     int checkHand (char randChar, short *counter);
     int checkPronounce (char randChar, short *counter);

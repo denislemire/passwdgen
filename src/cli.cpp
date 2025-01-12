@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2000 Denis Lemire <denis@lemire.com>
+//  Copyright (C) 2025 Denis Lemire <denis@lemire.name>
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -17,14 +17,10 @@
 //
 
 #include <iostream>
-#include <strstream>
-#include <config.h>
+#include <sstream>
+#include "../config.h"
 
-#ifdef HAVE_GETOPT_H
-  #include <getopt.h>
-#else
-  #include <mygetopt.h>
-#endif
+#include <getopt.h>
 
 #include "../class/password.h"
 
@@ -59,7 +55,7 @@ void displayHelp ()
        << "  -q, --quiet\t\toutput password only, no verbosity\n"
        << "      --version\t\tdisplay version information and exit\n"
        << "      --help\t\tdisplay this help and exit\n\n"
-       << "Report bugs to <denis@lemire.com>.\n";
+       << "Report bugs to <denis@lemire.name>.\n";
 }
 
 void displayVersion ()
@@ -71,7 +67,7 @@ int parseCmdLine (int argc, char **argv, password *a, int *quietOutput)
 {
   int option, option_index;
   int passwdType = 0, minLength = 6, maxLength = 8;
-  strstream s;
+  std::stringstream s;
 
   static struct option const long_options[] = {
     {"lowercase", no_argument, 0, 'a'},

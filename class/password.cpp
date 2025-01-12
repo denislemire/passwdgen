@@ -1,5 +1,5 @@
 //
-//  Copyright (C) 2000 Denis Lemire <denis@lemire.com>
+//  Copyright (C) 2025 Denis Lemire <denis@lemire.name>
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 #include <fstream>
 #include <stdlib.h>
-#include <config.h>
+#include "../config.h"
 #include "password.h"
 
 password::password ()
@@ -126,13 +126,13 @@ ostream &operator << (ostream &os, password &a)
   return os;
 }
 
-void password::lengthErr () throw (pwdgenerr)
+void password::lengthErr () noexcept(false)
 {
   pwdgenerr z ("password length must be a minimum of 4 and a maximum of 20.", 1);
   throw z;
 }
 
-void password::seedRandom () throw (pwdgenerr)
+void password::seedRandom () noexcept(false)
 {
   char randomSeed[4];
   ifstream devRandom;
