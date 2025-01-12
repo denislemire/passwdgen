@@ -79,11 +79,6 @@ char *password::generate ()
   char randChar;
   short passwdLength;
   short counter[2];
-
-  if (passwdLength < 1) {
-    lengthErr ();
-  }
-
   passwd = new char[passwdLength + 1];
 
   seedRandom ();
@@ -93,7 +88,11 @@ char *password::generate ()
   } else {
     passwdLength = (rand()%(maxLength - minLength + 1) + minLength);
   }
- 
+
+  if (passwdLength < 1) {
+    lengthErr ();
+  }
+
   for (counter[0]=0; counter[0]<=passwdLength; counter[0]++) {
     do {
       do {
