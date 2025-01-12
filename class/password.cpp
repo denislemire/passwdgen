@@ -343,9 +343,7 @@ int password::checkPronounce (char randChar, short *counter)
   char consonants[41] = "BCDFGHJKLMNPQRSTVWXZbcdfghjklmnpqrstvwxz";
   char vowels[13] = "AEIOUYaeiouy";
 
-  switch (isPronounceable) {
-    case false: return (1); break;
-    case true: 
+  if (isPronounceable) {
       if (pwdType == 0) return (1);
       if (counter[0]%2) { // Even, vowel. Odd, consenant.
         for (counter[1]=0; counter[1]<=10; counter[1]++) {
@@ -360,7 +358,9 @@ int password::checkPronounce (char randChar, short *counter)
           }
         }
       }
-      break;
+  } else {
+	return (1);
   }
+
   return (0);
 }
