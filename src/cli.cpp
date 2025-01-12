@@ -17,7 +17,7 @@
 //
 
 #include <iostream>
-#include <strstream>
+#include <sstream>
 #include "../config.h"
 
 #include <getopt.h>
@@ -67,7 +67,7 @@ int parseCmdLine (int argc, char **argv, password *a, int *quietOutput)
 {
   int option, option_index;
   int passwdType = 0, minLength = 6, maxLength = 8;
-  strstream s;
+  std::stringstream s;
 
   static struct option const long_options[] = {
     {"lowercase", no_argument, 0, 'a'},
