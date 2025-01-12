@@ -17,7 +17,7 @@
 //
 
 #include <iostream>
-#include <config.h>
+#include "../config.h"
 #include "cli.h"
 
 int main (int argc, char **argv)

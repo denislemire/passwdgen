@@ -18,13 +18,9 @@
 
 #include <iostream>
 #include <strstream>
-#include <config.h>
+#include "../config.h"
 
-#ifdef HAVE_GETOPT_H
-  #include <getopt.h>
-#else
-  #include <mygetopt.h>
-#endif
+#include <getopt.h>
 
 #include "../class/password.h"
 
