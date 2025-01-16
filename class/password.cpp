@@ -18,7 +18,6 @@
 
 #include <fstream>
 #include <stdlib.h>
-#include "../config.h"
 #include "password.h"
 
 password::password ()

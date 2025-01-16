@@ -18,7 +18,6 @@
 
 #include <iostream>
 #include <sstream>
-#include "../config.h"
 
 #include <getopt.h>
 
@@ -60,7 +59,7 @@ void displayHelp ()
 
 void displayVersion ()
 {
-  cout << PACKAGE << ' ' << VERSION << '\n';
+  cout << "passwdGen" << ' ' << PASSWDGEN_BUILD << '\n';
 }
 
 int parseCmdLine (int argc, char **argv, password *a, int *quietOutput)
