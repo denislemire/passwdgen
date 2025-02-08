@@ -30,7 +30,7 @@ jobs:
   build-linux-arm:
     docker:
       - image: cimg/base:stable
-    resource_class: denislemire/pirunner
+    resource_class: denislemire/runnerpi
     steps:
       - checkout
       - run:
