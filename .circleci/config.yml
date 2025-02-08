@@ -9,7 +9,7 @@ jobs:
       - checkout
       - run:
           name: Brew install bsdmake
-          command: brew install bsdmake
+          command: brew install bmake
       - run:
           name: Compile
           command: bmake
@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: sudo apt-get update && sudo apt-get install -y bsdmake
+          command: sudo apt update && sudo apt install -y bmake
       - run:
           name: Compile
           command: bmake
