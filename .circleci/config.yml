@@ -29,7 +29,7 @@ jobs:
 
   build-linux-arm:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:2025.02
     resource_class: denislemire/runnerpi
     steps:
       - run:
