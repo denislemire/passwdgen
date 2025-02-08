@@ -39,7 +39,8 @@ jobs:
       - run:
           name: Compile
           command: bmake
-
+      - store_artifacts:
+          path: ~/project/src/passwdgen
 
 workflows:
   build:
