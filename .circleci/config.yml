@@ -13,10 +13,12 @@ jobs:
       - run:
           name: Compile
           command: bmake
+      - store_artifacts:
+          path: ~/project/src/passwdgen
 
   build-linux:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:2025.02
     resource_class: denislemire/atomk3s
     steps:
       - checkout
@@ -26,10 +28,12 @@ jobs:
       - run:
           name: Compile
           command: bmake
+      - store_artifacts:
+          path: ~/project/src/passwdgen
 
   build-linux-arm:
     docker:
-      - image: cimg/base:stable
+      - image: cimg/base:2025.02
     resource_class: denislemire/runnerpi
     steps:
       - checkout
@@ -39,10 +43,10 @@ jobs:
       - run:
           name: Compile
           command: bmake
-
+      - store_artifacts:
+          path: ~/project/src/passwdgen
 
 workflows:
-  version: 2
   build:
     jobs:
       - build-macos
