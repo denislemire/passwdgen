@@ -32,9 +32,7 @@ jobs:
       - image: cimg/base:2025.02
     resource_class: denislemire/runnerpi
     steps:
-      - run:
-          name: Manual checkout
-          command: git clone -b ${CIRCLE_BRANCH} ${CIRCLE_REPOSITORY_URL}
+      - checkout
       - run:
           name: Install dependencies
           command: sudo apt update && sudo apt install -y bmake
