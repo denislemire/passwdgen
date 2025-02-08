@@ -1,7 +1,8 @@
+
 version: 2.1
 
 jobs:
-  build:
+  build-macos:
     macos:
       xcode: "16.2.0"
     steps:
@@ -10,8 +11,25 @@ jobs:
           name: Brew install bsdmake
           command: brew install bsdmake
       - run:
-          name: Brew install bsdmake
-          command: brew install bsdmake
+          name: Compile
+          command: bmake
+
+  build-linux:
+    docker:
+      - image: cimg/base:stable
+    resource_class: denislemire/atomk3s
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: sudo apt-get update && sudo apt-get install -y bsdmake
       - run:
           name: Compile
-          command: bsdmake
+          command: bmake
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build-macos
+      - build-linux
