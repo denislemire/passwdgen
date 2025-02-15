@@ -1,54 +1,16 @@
-
 version: 2.1
 
-jobs:
-  build-macos:
-    macos:
-      xcode: "16.2.0"
-    steps:
-      - checkout
-      - run:
-          name: Brew install bsdmake
-          command: brew install bmake
-      - run:
-          name: Compile
-          command: bmake
-      - store_artifacts:
-          path: ~/project/src/passwdgen
+orbs:
+  path-filtering: circleci/path-filtering@1.2.0
 
-  build-linux:
-    docker:
-      - image: cimg/base:2025.02
-    resource_class: denislemire/atomk3s
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: sudo apt update && sudo apt install -y bmake
-      - run:
-          name: Compile
-          command: bmake
-      - store_artifacts:
-          path: ~/project/src/passwdgen
-
-  build-linux-arm:
-    docker:
-      - image: cimg/base:2025.02
-    resource_class: denislemire/runnerpi
-    steps:
-      - checkout
-      - run:
-          name: Install dependencies
-          command: sudo apt update && sudo apt install -y bmake
-      - run:
-          name: Compile
-          command: bmake
-      - store_artifacts:
-          path: ~/project/src/passwdgen
+setup: true
 
 workflows:
-  build:
+  filter-and-continue:
     jobs:
-      - build-macos
-      - build-linux
-      - build-linux-arm
+      - path-filtering/filter:
+          mapping: |
+            src/.* run-build true
+            class/.* run-build true
+          base-revision: master
+          config-path: .circleci/continue_config.yml
