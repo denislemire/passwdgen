@@ -1,5 +1,9 @@
-
 version: 2.1
+
+parameters:
+  run-build:
+    type: boolean
+    default: false
 
 jobs:
   build-macos:
@@ -48,6 +52,7 @@ jobs:
 
 workflows:
   build:
+    when: << pipeline.parameters.run-build >>
     jobs:
       - build-macos
       - build-linux
