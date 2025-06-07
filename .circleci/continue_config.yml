@@ -23,7 +23,7 @@ jobs:
   build-linux:
     docker:
       - image: cimg/base:2025.02
-    resource_class: denislemire/atomk3s
+    resource_class: small
     steps:
       - checkout
       - run:
@@ -54,6 +54,6 @@ workflows:
   build:
     when: << pipeline.parameters.run-build >>
     jobs:
-      - build-macos
-      - build-linux
+#      - build-macos
+#      - build-linux
       - build-linux-arm
