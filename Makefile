@@ -19,6 +19,9 @@ clean:
 	@cd ${dir} && ${MAKE} clean
 .endfor
 
+test:
+	$(MAKE) -C tests test
+
 install: all
 	@echo "Installing src/passwdgen to ${PREFIX}/bin"
 	install -d ${PREFIX}/bin
