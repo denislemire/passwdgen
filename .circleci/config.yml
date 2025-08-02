@@ -1,16 +1,51 @@
 version: 2.1
 
-orbs:
-  path-filtering: circleci/path-filtering@1.3.0
+parameters:
+  run-build:
+    type: boolean
+    default: true
 
-setup: true
+jobs:
+  build-macos:
+    macos:
+      xcode: "16.2.0"
+    steps:
+      - checkout
+      - run:
+          name: Brew install bsdmake
+          command: brew install bmake
+      - run:
+          name: Compile
+          command: bmake
+      - store_artifacts:
+          path: ~/project/src/passwdgen
+
+  build-linux:
+    docker:
+      - image: cimg/base:2025.08
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: sudo apt update && sudo apt install -y bmake
+      - run:
+          name: Setup Catch2
+          command: |
+            curl -o tests/catch.hpp https://raw.githubusercontent.com/catchorg/Catch2/v2.x/single_include/catch2/catch.hpp
+            mkdir -p test-results/junit
+      - run:
+          name: Build
+          command: bmake
+      - run:
+          name: Run Tests
+          command: bmake test
+      - store_artifacts:
+          path: ~/project/src/passwdgen
+      - store_test_results:
+          path: test-results
 
 workflows:
-  filter-and-continue:
+  build:
     jobs:
-      - path-filtering/filter:
-          mapping: |
-            src/.* run-build true
-            class/.* run-build true
-          base-revision: master
-          config-path: .circleci/continue_config.yml
+      - build-linux
