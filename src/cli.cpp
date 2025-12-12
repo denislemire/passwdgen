@@ -26,7 +26,7 @@
 void instructUser ();
 void displayHelp ();
 void displayVersion ();
-int parseCmdLine (int argc, char **argv, password *a, int *quietOput);
+int parseCmdLine (int argc, char **argv, password *a, int *quietOutput);
 
 void instructUser ()
 {

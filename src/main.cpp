@@ -19,6 +19,9 @@
 #include <iostream>
 #include "cli.h"
 
+using std::cout;
+using std::cerr;
+
 int main (int argc, char **argv)
 {
   password a;

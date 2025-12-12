@@ -17,7 +17,7 @@
 //
 
 #include <fstream>
-#include <stdlib.h>
+#include <random>
 #include "password.h"
 
 password::password ()
@@ -32,6 +32,8 @@ password::password ()
 password::password (int a, int b)
 {
   pwdType = a;
+  minLength = b;
+  maxLength = b;
   whichHand = 0;
   isPronounceable = false;
 }
@@ -78,7 +80,6 @@ char *password::generate ()
   char randChar;
   short passwdLength;
   short counter[2];
-  passwd = new char[passwdLength + 1];
 
   seedRandom ();
 
@@ -89,12 +90,14 @@ char *password::generate ()
   if (minLength == maxLength) {
     passwdLength = maxLength;
   } else {
-    passwdLength = (rand()%(maxLength - minLength + 1) + minLength);
+    passwdLength = secureRandom(maxLength - minLength + 1) + minLength;
   }
 
   if (passwdLength < 1) {
     lengthErr ("password length must be a minimum of 1.");
   }
+
+  passwd = new char[passwdLength + 1];
 
   for (counter[0]=0; counter[0]<=passwdLength; counter[0]++) {
     do {
@@ -123,20 +126,22 @@ void password::lengthErr (const char *str) noexcept(false)
 
 void password::seedRandom () noexcept(false)
 {
-  char randomSeed[4];
-  ifstream devRandom;
- 
-  devRandom.open ("/dev/random");
-  if (devRandom.fail()) {
-    pwdgenerr z ("unable to open /dev/random.", 2);
+  // This function is kept for compatibility but no longer needed
+  // as we now use secureRandom() which uses std::random_device
+}
+
+// Secure random number generator using std::random_device (CSPRNG)
+// Cross-platform: uses OS CSPRNG (/dev/urandom on Unix, CryptGenRandom on Windows, etc.)
+static int secureRandom(int max) noexcept(false)
+{
+  if (max <= 0) {
+    pwdgenerr z ("invalid random range.", 2);
     throw z;
   }
- 
-  devRandom >> randomSeed[0] >> randomSeed[1]
-            >> randomSeed[2] >> randomSeed[3];
- 
-  devRandom.close ();
-  srand (randomSeed[0]<<24|randomSeed[1]<<16|randomSeed[2]<<8|randomSeed[3]);
+  
+  static std::random_device rd;
+  std::uniform_int_distribution<int> dist(0, max - 1);
+  return dist(rd);
 }
 
 char password::getASCII ()
@@ -149,13 +154,13 @@ char password::getASCII ()
 
   switch (pwdType) {
     case 1: // Lowercase alphabetic
-    return (lowerCase[rand()%26]);
+    return (lowerCase[secureRandom(26)]);
 
     case 2: // Uppercase alphabetic
-    return (upperCase[rand()%26]);
+    return (upperCase[secureRandom(26)]);
 
     case 3: // Mixed case alphabetic
-    tmpVar = rand()%52;
+    tmpVar = secureRandom(52);
     if (tmpVar > 25) {
       return (upperCase[tmpVar - 26]);
     } else {
@@ -163,10 +168,10 @@ char password::getASCII ()
     }
 
     case 4: // Numeric
-    return (numeric[rand()%10]);
+    return (numeric[secureRandom(10)]);
 
     case 5: // Lowercase alphanumeric
-    tmpVar = rand()%36;
+    tmpVar = secureRandom(36);
     if (tmpVar > 9) {
       return (lowerCase[tmpVar - 10]);
     } else {
@@ -174,7 +179,7 @@ char password::getASCII ()
     }
 
     case 6: // Uppercase alphanumeric
-    tmpVar = rand()%36;
+    tmpVar = secureRandom(36);
     if (tmpVar > 9) {
       return (upperCase[tmpVar - 10]);
     } else {
@@ -182,7 +187,7 @@ char password::getASCII ()
     }
 
     case 7: // Mixed case alphanumeric
-    tmpVar = rand()%62;
+    tmpVar = secureRandom(62);
     if (tmpVar > 9) {
       if (tmpVar > 35) {
         return (upperCase[tmpVar - 36]); 
@@ -194,10 +199,10 @@ char password::getASCII ()
     }
 
     case 8: // Misc characters only
-    return (printAble[rand()%18]);
+    return (printAble[secureRandom(18)]);
 
     case 9: // Lowercase alphabetic and misc
-    tmpVar = rand()%44;
+    tmpVar = secureRandom(44);
     if (tmpVar > 17) {
       return (lowerCase[tmpVar - 18]);
     } else {
@@ -205,7 +210,7 @@ char password::getASCII ()
     }
 
     case 10: // Uppercase alphabetic and misc
-    tmpVar = rand()%44;
+    tmpVar = secureRandom(44);
     if (tmpVar > 17) {
       return (upperCase[tmpVar - 18]);
     } else {
@@ -213,7 +218,7 @@ char password::getASCII ()
     }
 
     case 11: // Mixed case alphabetic and misc
-    tmpVar = rand()%62;
+    tmpVar = secureRandom(62);
     if (tmpVar > 17) {
       if (tmpVar > 43) {
         return (upperCase[tmpVar - 44]); 
@@ -225,7 +230,7 @@ char password::getASCII ()
     }
 
     case 12: // Numeric and printable
-    tmpVar = rand()%28;
+    tmpVar = secureRandom(28);
     if (tmpVar > 17) {
       return (numeric[tmpVar - 18]);
     } else {
@@ -233,7 +238,7 @@ char password::getASCII ()
     }
 
     case 13: // Lowercase alphanumeric and misc
-    tmpVar = rand()%54;
+    tmpVar = secureRandom(54);
     if (tmpVar > 17) {
       if (tmpVar > 27) {
         return (lowerCase[tmpVar - 28]);
@@ -245,7 +250,7 @@ char password::getASCII ()
     }
 
     case 14: // Uppercase alphanumeric and misc
-    tmpVar = rand()%54;
+    tmpVar = secureRandom(54);
     if (tmpVar > 17) {
       if (tmpVar > 27) {
         return (upperCase[tmpVar - 28]);
@@ -257,7 +262,7 @@ char password::getASCII ()
     }
 
     case 15: // Mixed case alphanumeric and misc
-    tmpVar = rand()%80;
+    tmpVar = secureRandom(80);
     if (tmpVar > 17) {
       if (tmpVar > 27) {
         if (tmpVar > 53) {
